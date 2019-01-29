@@ -16,14 +16,14 @@ const showGame = () => {
  * @param {number} max
  * @returns {number}
  */
-const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
+const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max) + 1);
 
 /**
  * Lance le jeu
  * @param {boolean} b
  */
 const run = (b) => {
-    let aNombres = [];
+    const aNombres = [];
     if (b) {
         showGame();
     }
@@ -43,33 +43,33 @@ const run = (b) => {
                 rl.question('Choisir un chiffre en 0 et ' + max + ' ? ', (rep) => {
                     if (rep === 'exit') {
                         console.log("\n @ + o_O\n");
-                        rl.close();
-                    } else {
-                        rep = Number(rep);
-                        if (isNaN(rep)) {
-                            console.log("C'est un nombre");
-                            start();
-                        } else {
-                            console.log("Rappel des chiffres : " + aNombres.join(', '));
-                            aNombres.push(rep);
-
-                            // Moins
-                            if (rep > nb) {
-                                console.log("C'est moins");
-                                start();
-                            }
-                            // Plus
-                            if (rep < nb) {
-                                console.log("C'est plus");
-                                start();
-                            }
-                            // Gagné
-                            if (rep === nb) {
-                                console.log("C'est gagné : " + nb);
-                                rl.close();
-                            }
-                        }
+                        return rl.close();
                     }
+                    rep = Number(rep);
+                    if (isNaN(rep)) {
+                        console.log("C'est un nombre");
+                        return sstart();
+                    }
+                    console.log("Rappel des chiffres : " + aNombres.join(', '));
+                    aNombres.push(rep);
+                    // Moins
+                    if (rep > nb) {
+                        console.log("C'est moins");
+                        return start();
+                    }
+                    // Plus
+                    if (rep < nb) {
+                        console.log("C'est plus");
+                        return start();
+                    }
+                    // Gagné
+                    console.log("C'est gagné : " + nb);
+                    rl.question('Recommencer ? ', (r) => {
+                        if (r.toUpperCase() === 'Y' || r.toUpperCase() === 'YES') {
+                            return run(false);
+                        }
+                        rl.close();
+                    });
                 });
             }
             start();
