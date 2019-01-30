@@ -1,5 +1,5 @@
 const prenoms = [
-    'Romain', 'Pierre', 'Jean', 'Robert'
+  'Romain', 'Pierre', 'Jean', 'Robert'
 ];
 
 /**
@@ -8,11 +8,11 @@ const prenoms = [
  * @returns {string} Le message
  */
 function hello(prenom) {
-    return 'Bonjour ' + prenom;
+  return 'Bonjour ' + prenom;
 }
 
 // Boucle pour chaque personne
 for (let i = 0; i < prenoms.length; i++) {
-    const p = prenoms[i];
-    console.log(hello(p));
+  const p = prenoms[i];
+  console.log(hello(p));
 }
